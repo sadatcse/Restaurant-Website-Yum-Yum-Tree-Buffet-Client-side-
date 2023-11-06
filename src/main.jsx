@@ -21,6 +21,8 @@ import Home from './components/Page/Home';
 
 import Register from './components/Authentication/Register';
 import Login from './components/Authentication/Login';
+import Allfood from './components/Page/Allfood';
+import AddProduct from './components/Dashboard/AddProduct';
 
 
 
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>
+      },
+      {
+        path: '/allfood',
+        element: <Allfood></Allfood>
+      },
+      {
+        path: '/add',
+        element: <AddProduct></AddProduct>
       },
        
 

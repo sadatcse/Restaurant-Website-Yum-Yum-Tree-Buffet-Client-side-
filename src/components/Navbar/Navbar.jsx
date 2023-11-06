@@ -21,10 +21,10 @@ const Navbar = () => {
   
     const navlinks = <> 
     <li><NavLink to="/">Home</NavLink></li>
-    
+    <li><NavLink to="/allfood">All Food Items</NavLink></li>
     <li><NavLink to="/register">Registration</NavLink></li>
     { user && <>
-            <li><NavLink to="/addproduct">Add Product </NavLink></li>
+            <li><NavLink to="/add">Add Product </NavLink></li>
             <li><NavLink to="/cart">My Cart</NavLink></li>
         </>}
     </>
