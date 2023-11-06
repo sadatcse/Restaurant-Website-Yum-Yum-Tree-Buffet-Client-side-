@@ -1,3 +1,4 @@
+import RestaurantBanner from "../Homepage/Banner/Banner";
 
 
 
@@ -5,7 +6,7 @@
 const Home = () => {
     return (
         <div>
-       <h1>This is Home Page</h1>
+       <RestaurantBanner></RestaurantBanner>
 
         </div>
        
