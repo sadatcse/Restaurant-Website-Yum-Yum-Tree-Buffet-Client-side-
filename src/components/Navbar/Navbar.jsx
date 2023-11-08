@@ -1,5 +1,5 @@
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import toast from 'react-hot-toast';
@@ -8,6 +8,13 @@ import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const useremail = user?.email;
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -23,58 +30,63 @@ const Navbar = () => {
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/allfood">All Food Items</NavLink></li>
     <li><NavLink to="/register">Registration</NavLink></li>
+    <li><NavLink to="/blog">Blog</NavLink></li>
     { user && <>
             <li><NavLink to="/add">Add Product </NavLink></li>
-            <li><NavLink to="/cart">My Cart</NavLink></li>
+        
         </>}
     </>
 
 
-    return (
-        <div className="navbar bg-base-100 border-solid border-2 border-gray-100">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                    </label>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                  {navlinks}
-                    </ul>
-                </div>
-                <div className="flex items-center">
-            <img src="https://i.ibb.co/wy1tLVL/Logo.png" alt="Company Logo"className="h-2/4 w-2/4 mr-2"/>
-
+return (
+  <div className="navbar bg-base-100 border-solid border-2 border-gray-100">
+    <div className="navbar-start">
+      <div className="dropdown">
+        <label tabIndex={0} className="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        </label>
+        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          {navlinks}
+        </ul>
+      </div>
+      <div className="flex items-center">
+        <img src="https://i.ibb.co/wy1tLVL/Logo.png" alt="Company Logo" className="h-2/4 w-2/4 mr-2" />
+      </div>
+    </div>
+    <div className="navbar-center hidden lg:flex">
+      <ul className="menu menu-horizontal px-1">
+        {navlinks}
+      </ul>
+    </div>
+    <div className="navbar-end">
+      {user ? (
+        <>
+          <div className='me-2'>
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img onClick={toggleDropdown} src={user.photoURL} alt={user.displayName} />
+              </div>
+            </label>
           </div>
-            </div>
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                {navlinks}
-                </ul>
-            </div>
-            <div>
+          <span>{user.displayName}</span>
+          <a onClick={handleLogOut} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Sign out</a>
+        </>
+      ) : (
+        <NavLink to="/login">
+          <button className="btn btn-warning">Login</button>
+        </NavLink>
+      )}
+    </div>
+    {isOpen && (
+ <div onMouseLeave={toggleDropdown} className="absolute menu  top-10 right-20 z-10 bg-white shadow-md p-2 flex flex-col">
+<li><a href={`/myadd/${useremail}/`}>My added food items</a></li>
+ <Link to="/add"><li>Add a food item</li></Link>
+ <Link to="/login"> <li>My ordered food items</li></Link>
 
-            </div>
-            <div className="navbar-end">
-                {
-                    user ? <>
-                        <div className='me-2'>   
-                        <label tabindex="0" className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
-                        <img src={user.photoURL} />
-                        </div>
-                        </label></div>
-                      
-                        <span>{user.displayName}</span>
-                        <a onClick={handleLogOut} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Sign out</a>
-                    </> 
-                    : <NavLink><Link to="/login">
-                        <button className="btn btn-warning ">Login</button>
-                    </Link></NavLink>
-                }
-                
-            </div>
-        </div>
-    );
+</div>
+    )}
+  </div>
+);
 };
 
 export default Navbar;

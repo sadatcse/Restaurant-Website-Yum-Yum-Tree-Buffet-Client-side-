@@ -9,7 +9,7 @@ export function displayStars(rating)  {
     }
   
     if (halfStar) {
-      stars.push('★½');
+      stars.push('★');
     }
   
     for (let i = 0; i < emptyStars; i++) {

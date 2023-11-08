@@ -1,178 +1,161 @@
-import React from 'react';
+import  { useContext, useState } from 'react';
+import { AuthContext } from "../../providers/AuthProvider";
 import toast from 'react-hot-toast';
+import axios from 'axios';
+
+
 const AddProduct = () => {
+  const { user } = useContext(AuthContext);
 
-    const handleRegister = e => {
+  const useremail = user?.email;
 
+  const [formData, setFormData] = useState({
+    Food_name: '',
+    Food_category: '',
+    Food_amount: '',
+    Food_quantity: '',
+    Food_rating: '',
+    Food_price: '',
+    order_count: "0",
+    Food_image: '',
+    Food_madeby: '',
+    Food_origin: '',
+    food_addedby: `${useremail}`, 
+    Food_shortdescription: '',
+  });
+
+  const handleRegister = (e) => {
     e.preventDefault();
-    const Model = e.target.Model.value;
-    const Brand = e.target.Brand.value;
-    const category = e.target.category.value;
-    const name = e.target.name.value;
-    const Specification = e.target.Specification.value;
-    const regularPrice = e.target.regularPrice.value
-    const Special =e.target.Special.value
-    const ratingsaverage =e.target.ratingsaverage.value
-    const ratingscount =e.target.ratingscount.value
-    const Feature1 =e.target.Feature1.value
-    const Feature2 =e.target.Feature2.value
-    const Feature3 =e.target.Feature3.value
-    const ButtonColor =e.target.ButtonColor.value
-    const image =e.target.image.value
+    console.log(formData);
 
+    axios.post('http://localhost:5000/menus', formData)
+    .then(data => {
+      console.log(data);
+      toast.success("New menu Added Sucessful")
+      window.location.reload();
+    
+      
+    })
+  
+  };
 
-    const product = {        
-        Model: Model,
-        Brand: Brand,
-        category: category,
-        name: name,
-        Specification: Specification,
-        "Regular Price": regularPrice,
-        "Special Price": Special,
-        ratings: {
-            average: ratingsaverage,
-            count: ratingscount,
-        },
-        features: {
-            "Feature 1": Feature1,
-            "Feature 2": Feature2,
-            "Feature 3":Feature3,
-        },
-        ButtonColor: ButtonColor,
-        image: image,
-    };
-    fetch('https://h-technology-server-c72odg8xe-sadatcses-projects.vercel.app/product', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(product)
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            // Product successfully deleted
-            toast.success('Product Add to Database'); }
-            else {
-              // Handle errors here, e.g., product not found, server error, etc.
-              toast.error('Product Failed to add');
-            }
+  const handleChange = (e) => {
+    setFormData({...formData,[e.target.name]: e.target.value,});};
 
-
-          })
-        ;
-
-    }
-    return (
-<div className="bg-gray-100 min-h-screen flex items-center justify-center">
-  <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-    <h2 className="text-5xl mb-8 text-center">Add Product </h2>
-    <form onSubmit={handleRegister} >
-      <input
-        className="mb-4 relative border w-full py-2 px-4"
-        type="text"
-        name="Model"
-        placeholder="Product Model"
-        id="promodel"
-        required/>
-      <br />
-      <input className="mb-4 relative border w-full  py-2 px-4" 
-      type="text" 
-      name="name" 
-      placeholder="Product Name" 
-      id="proname"/>
-      <br />
-      <div className="mb-4 relative border">
-        <label htmlFor="Brand">Brand:</label>
-        <select
-          id="Brand"
-          name="Brand"
-          className="w-full py-2 px-4"
-          required
-        >
-          <option value="" disabled selected>
-            Select Brand
-          </option>
-          <option value="apple">apple</option>
-          <option value="amazon">amazon</option>
-          <option value="samsung">samsung</option>
-          <option value="sony">sony</option>
-          <option value="google">google</option>
-          <option value="intel">intel</option>
-          
-        </select>
+  return (
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-5xl mb-8 text-center">Add Food item</h2>
+        <form onSubmit={handleRegister}>
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_name"
+            placeholder="Food name"
+            value={formData.Food_name}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_category"
+            placeholder="Food category"
+            value={formData.Food_category}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_amount"
+            placeholder="Food amount"
+            value={formData.Food_amount}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_quantity"
+            placeholder="Food quantity"
+            value={formData.Food_quantity}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_rating"
+            placeholder="Food rating"
+            value={formData.Food_rating}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_price"
+            placeholder="Food price"
+            value={formData.Food_price}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_image"
+            placeholder="Food image url"
+            value={formData.Food_image}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_madeby"
+            placeholder="Made by"
+            value={formData.Food_madeby}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_origin"
+            placeholder="Food origin Country"
+            value={formData.Food_origin}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="mb-4 relative border w-full py-2 px-4"
+            type="text"
+            name="Food_shortdescription"
+            placeholder="Short description"
+            value={formData.Food_shortdescription}
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <input
+            className="btn btn-secondary mb-4 w-full"
+            type="submit"
+            value="Add Food Items"
+          />
+        </form>
       </div>
-      <br />
-      <div className="mb-4 relative border">
-        <label htmlFor="Brand">Category:</label>
-        <select
-          id="category"
-          name="category"
-          className="w-full py-2 px-4"
-          required
-        >
-          <option value="" disabled selected>
-            Select Category
-          </option>
-          <option value="Mobile">Mobile</option>
-          <option value="TV">TV</option>
-          <option value="Laptop">Laptop</option>
-          <option value="Camera">Camera</option>
-          <option value="Accessories">Accessories</option>
-         
-          
-        </select>
-      </div>
-      <br />
-      <input
-        className="mb-4 relative border w-full py-2 px-4"
-        type="text"
-        name="Specification"
-        placeholder="Specification"
-        id="specification"
-        required
-      />
-      <br />
-      <input
-        className="mb-4 relative border w-full py-2 px-4"
-        type="text"
-        name="regularPrice"
-        placeholder="Regular Price"
-        id="RegularPricea"
-        required
-      />
-      <br />
-      <input
-        className="mb-4 relative border w-full py-2 px-4"
-        type="text"
-        name="Special"
-        placeholder="Special Price"
-        id="RegularPrice"
-        required
-      />
-      <br />
-      <div className="mb-4">
-      <input className="mb-2 relative border w-full py-2 px-4" type="text" name="ratingsaverage" placeholder="rating average" id="streetnamereg" required />
-        <br />
-        <input className="mb-2 relative border w-full py-2 px-4" type="text" name="ratingscount" placeholder="ratings count" id="streetnumberreg" required />
-        <br />
-        <input className="mb-2 relative border w-full py-2 px-4" type="text" name="Feature1" placeholder="Feature 1" id="streetnamereg" required />
-        <br />
-        <input className="mb-2 relative border w-full py-2 px-4" type="text" name="Feature2" placeholder="Feature 2" id="streetnumberreg" required />
-        <br />
-        <input className="mb-2 relative border w-full py-2 px-4" type="text" name="Feature3" placeholder="Feature 3" id="areareg" required />
-        <br />
-        <input className="mb-2 relative border w-full py-2 px-4" type="text" name="ButtonColor" placeholder="ButtonColor" id="townreg" required />
-        <br />
-        <input className="mb-2 relative border w-full py-2 px-4" type="text" name="image" placeholder="image" id="postcodereg" required />
-      </div>
-      <br />
-      <input className="btn btn-secondary mb-4 w-full" type="submit" value="Add Product" />
-    </form>
-
-  </div>
-</div>
-    );
+    </div>
+  );
 };
 
 export default AddProduct;

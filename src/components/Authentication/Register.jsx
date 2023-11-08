@@ -4,6 +4,8 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { AuthContext } from './../../providers/AuthProvider';
 import { updateProfile } from "firebase/auth";
+import axios from 'axios';
+
 
 const Register = () => {
   const { createUser,setUser } = useContext(AuthContext);
@@ -82,21 +84,14 @@ const Register = () => {
             // Mongo Db Data send Area 
 
             const uid =result.user?.uid
-            const user = { uid,mobile,gender,dateOfBirth,education,streetName,streetNumber,area,town,postCode};
+            const emaila =result.user?.email
+            const user = { uid,mobile,emaila,gender,dateOfBirth,education,streetName,streetNumber,area,town,postCode};
 
-            fetch('', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if(data.insertedId){
-                            console.log('user added to the database')
-                        }
-                    })
+            axios.post('http://localhost:5000/users', user)
+            .then(data => {
+              console.log(data);
+
+            })
             
 
 
