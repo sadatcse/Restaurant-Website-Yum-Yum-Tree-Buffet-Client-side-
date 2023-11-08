@@ -84,8 +84,8 @@ const Register = () => {
             // Mongo Db Data send Area 
 
             const uid =result.user?.uid
-            const emaila =result.user?.email
-            const user = { uid,mobile,emaila,gender,dateOfBirth,education,streetName,streetNumber,area,town,postCode};
+            const email =result.user?.email
+            const user = { uid,mobile,email,gender,dateOfBirth,education,streetName,streetNumber,area,town,postCode};
 
             axios.post('http://localhost:5000/users', user)
             .then(data => {

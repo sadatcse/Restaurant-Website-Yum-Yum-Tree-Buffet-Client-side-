@@ -12,10 +12,18 @@ const DetailsPage  = () => {
 
     const ratingString = ratings(menu.Food_rating);
 
-    const handleAddToCart = () => {
+    const Food_name = menu.Food_name;
+    const Food_image =menu.Food_image;
+    const Food_price =menu.Food_price;
 
-     console.log(useremail)
+
+    const handleAddToCart = () => {
+      if (menu.food_addedby == useremail) {
+        toast.error(`You not order your food`);
+    } else {
       toast.success(`Added ${menu.Food_name} to the cart`);
+    }
+
     };
 
 
