@@ -2,22 +2,37 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RestaurantCard from '../Card/RestaurantCard';
 import { FaSearch } from 'react-icons/fa';
+import { useLoaderData } from 'react-router-dom';
 
 const Allfood = () => {
+  const totalmenu =useLoaderData();
+  console.log(totalmenu.count);  
   const [Menusdata, setMenusdata] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState('all');
+  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [count, setCount] = useState(0);
+  const numberOfPages = Math.ceil(count / itemsPerPage);
 
-  useEffect(() => {
-    // Make an API request to fetch data
-    axios.get('http://localhost:5000/menusearch/all')
+  const handleSearch = () => {
+
+    const searchURL = `http://localhost:5000/menusearch/${searchText}`;
+
+    axios.get(searchURL)
       .then((response) => {
-        setMenusdata(response.data); // Assuming the response data is an array
+        setMenusdata(response.data);
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    handleSearch();
+    setSearchText('');
   }, []);
 
   return (
@@ -31,6 +46,13 @@ const Allfood = () => {
               type="text"
               placeholder="Search your food"
               className="input input-bordered input-primary w-full max-w-xs"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch();
+                }
+              }}
             />
           </div>
         </div>
