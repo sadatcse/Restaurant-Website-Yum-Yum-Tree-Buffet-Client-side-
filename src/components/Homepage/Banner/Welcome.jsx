@@ -2,12 +2,14 @@ import React from 'react';
 
 const Welcome = () => {
     return (
-<div>  <div className='mt-10'>
-            <h1 className='text-center text-3xl	'>Welcome To <span className='text-red-500'>Yum Yum Tree Buffet & Restaurant</span> </h1>
+<div>  <div className='mt-10 text-center'>
+<h1 className="text-4xl font-extrabold text-red-700 mb-6">
+          Welcome To <span className="text-5xl text-red-500">Yum Yum Tree Buffet & Restaurant</span>
+        </h1>
         </div>
         <div>
-            <div className="grid grid-cols-2 gap-4 mx-10">
-            <div className="mt-10">
+            <div className="grid grid-cols-2 gap-4 mx-10 px-10">
+            <div className="mt-10 mx-10 px-10">
         <div className="text-lg mb-6">
           <h2 className="text-3xl font-bold mb-2">WHO WE ARE</h2>
           <p>
@@ -44,7 +46,7 @@ const Welcome = () => {
         </div>
       </div>
 
-      <div className=" mt-10 pl-6">
+      <div className=" mt-10 pl-6 mr-10 pr-10">
         <img src="https://i.ibb.co/0JQZN1M/evening.png" alt="Evening View" className="w-full h-full rounded-lg" />
        
          
