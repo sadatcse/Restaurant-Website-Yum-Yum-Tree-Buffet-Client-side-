@@ -15,7 +15,7 @@ const Allfood = () => {
   const numberOfPages = Math.ceil(count / itemsPerPage);
 
   const handleSearch = () => {
-    const searchURL = `http://localhost:5000/menusearch/${searchText}`;
+    const searchURL = `https://yumyum-store-server.vercel.app/menusearch/${searchText}`;
 
     axios.get(searchURL)
       .then((response) => {

@@ -10,7 +10,7 @@ const Toporder = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/menusort/');
+                const response = await axios.get('https://yumyum-store-server.vercel.app/menusort/');
                 setData(response.data);
                 setLoading(false);
             } catch (error) {

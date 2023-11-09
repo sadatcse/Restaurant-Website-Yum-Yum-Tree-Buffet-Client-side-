@@ -13,7 +13,7 @@ const Myadded = () => {
     const UserEmail = user?.email;
 
     const handleDelete = (menuid) => {
-        const apiUrl = `http://localhost:5000/menus/${menuid}`;
+        const apiUrl = `https://yumyum-store-server.vercel.app/menus/${menuid}`;
 
         axios
             .delete(apiUrl)
@@ -30,7 +30,7 @@ const Myadded = () => {
     }
 
     useEffect(() => {
-        const fetchUrl = `http://localhost:5000/menuse/${UserEmail}`;
+        const fetchUrl = `https://yumyum-store-server.vercel.app/menuse/${UserEmail}`;
 
         axios.get(fetchUrl)
             .then((response) => {

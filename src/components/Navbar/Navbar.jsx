@@ -79,7 +79,7 @@ return (
     </div>
     {isOpen && (
  <div onMouseLeave={toggleDropdown} className="absolute menu  top-10 right-20 z-10 bg-white shadow-md p-2 flex flex-col">
-<li><a href={`/myadd/${useremail}/`}>My added food items</a></li>
+<li><a href={`/myadd`}>My added food items</a></li>
 <li><Link to="/add">Add a food item</Link></li>
  <li><Link to="/myorder"> My ordered food items</Link></li>
 

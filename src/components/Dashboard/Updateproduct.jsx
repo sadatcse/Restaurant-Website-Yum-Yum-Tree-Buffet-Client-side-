@@ -33,7 +33,7 @@ const Updateproduct = () => {
     e.preventDefault();
     console.log(formData);
   
-    axios.patch(`http://localhost:5000/menus/${Menu_item._id}`, formData)
+    axios.patch(`https://yumyum-store-server.vercel.app/menus/${Menu_item._id}`, formData)
       .then((response) => {
         console.log(response.data);
         toast.success("Menu Updated Successfully");

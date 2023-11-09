@@ -28,7 +28,7 @@ const AddProduct = () => {
     e.preventDefault();
     console.log(formData);
 
-    axios.post('http://localhost:5000/menus', formData)
+    axios.post('https://yumyum-store-server.vercel.app/menus', formData)
     .then(data => {
       console.log(data);
       toast.success("New menu Added Sucessful")

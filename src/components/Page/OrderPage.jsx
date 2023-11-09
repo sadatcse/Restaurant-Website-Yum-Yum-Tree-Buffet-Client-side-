@@ -22,7 +22,7 @@ const OrderPage = () => {
     const handlePurchase = async () => {
         if (quantity <= FoodStock && quantity > 0) {
             try {
-                const response = await axios.post('http://localhost:5000/carts/', {
+                const response = await axios.post('https://yumyum-store-server.vercel.app/carts/', {
                     foodName,
                     price,
                     quantity,

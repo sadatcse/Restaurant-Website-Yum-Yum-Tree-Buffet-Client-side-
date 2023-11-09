@@ -30,7 +30,7 @@ import Blog from './components/Page/Blog';
 import Updateproduct from './components/Dashboard/Updateproduct';
 import OrderPage from './components/Page/OrderPage';
 import Myorderfood from './components/Page/Myorderfood';
-
+import PrivateRoot from './components/Root/PrivateRoot';
 
 
 
@@ -57,21 +57,21 @@ const router = createBrowserRouter([
       {
         path: '/allfood',
         element: <Allfood></Allfood>,
-        loader: () => fetch('http://localhost:5000/menusCount/')
+        loader: () => fetch('https://yumyum-store-server.vercel.app/menusCount/')
       },
 
       {
         path: '/add',
-        element: <AddProduct></AddProduct>
+        element: <PrivateRoot><AddProduct></AddProduct></PrivateRoot>,
       },
       { 
         path: '/menus/:id',
-        element: <DetailsPage></DetailsPage>,
-        loader: ({ params }) => fetch(`http://localhost:5000/menus/${params.id}`)   
+        element: <PrivateRoot><DetailsPage></DetailsPage></PrivateRoot>,
+        loader: ({ params }) => fetch(`https://yumyum-store-server.vercel.app/menus/${params.id}`)   
       },
       {
         path: '/myadd/',
-        element: <Myadded></Myadded>
+        element: <PrivateRoot><Myadded></Myadded></PrivateRoot>
            
       },
       {
@@ -81,17 +81,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/updatemenu/:id',
-        element:<Updateproduct></Updateproduct>,
-        loader: ({ params }) => fetch(`http://localhost:5000/menus/${params.id}`)  
+        element:<PrivateRoot><Updateproduct></Updateproduct></PrivateRoot>,
+        loader: ({ params }) => fetch(`https://yumyum-store-server.vercel.app/menus/${params.id}`)  
       },
       {
         path: '/order/:id',
-        element:<OrderPage></OrderPage>,
-        loader: ({ params }) => fetch(`http://localhost:5000/menus/${params.id}`)  
+        element:<PrivateRoot><OrderPage></OrderPage></PrivateRoot>,
+        loader: ({ params }) => fetch(`https://yumyum-store-server.vercel.app/menus/${params.id}`)  
       },
       {
         path: '/myorder',
-        element:<Myorderfood></Myorderfood>
+        element:<PrivateRoot><Myorderfood></Myorderfood></PrivateRoot>
       },
        
     ]
