@@ -28,6 +28,7 @@ import Myadded from './components/Page/Myadded';
 import Error404 from './components/Page/Error404';
 import Blog from './components/Page/Blog';
 import Updateproduct from './components/Dashboard/Updateproduct';
+import OrderPage from './components/Page/OrderPage';
 
 
 
@@ -80,6 +81,11 @@ const router = createBrowserRouter([
       {
         path: '/updatemenu/:id',
         element:<Updateproduct></Updateproduct>,
+        loader: ({ params }) => fetch(`http://localhost:5000/menus/${params.id}`)  
+      },
+      {
+        path: '/order/:id',
+        element:<OrderPage></OrderPage>,
         loader: ({ params }) => fetch(`http://localhost:5000/menus/${params.id}`)  
       },
        

@@ -3,25 +3,24 @@ import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from "../../providers/AuthProvider";
 import { displayStars as ratings } from '../Utilis/Start';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 const DetailsPage  = () => {
     const menu = useLoaderData();
     console.log(menu);
     const { user} = useContext(AuthContext);
-
+    console.log(user);
+    const navigate = useNavigate();
     const useremail = user?.email;
 
     const ratingString = ratings(menu.Food_rating);
 
-    const Food_name = menu.Food_name;
-    const Food_image =menu.Food_image;
-    const Food_price =menu.Food_price;
 
 
     const handleAddToCart = () => {
       if (menu.food_addedby == useremail) {
         toast.error(`You not order your food`);
     } else {
-      toast.success(`Added ${menu.Food_name} to the cart`);
+      navigate(`/order/${menu._id}`);
     }
 
     };
@@ -80,7 +79,7 @@ const DetailsPage  = () => {
         <button
           onClick={handleAddToCart}
           className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600">
-          Add to Cart
+          Order Food
         </button>
       </div>
     </div>
