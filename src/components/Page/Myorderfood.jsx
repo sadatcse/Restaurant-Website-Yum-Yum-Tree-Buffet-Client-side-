@@ -75,11 +75,6 @@ const Myorderfood = () => {
                               
                                 <td>
                                     <button
-                                        onClick={() => handleEdit(menu._id)}
-                                        className="btn mr-2">
-                                        <FaEdit /> Edit
-                                    </button>
-                                    <button
                                         onClick={() => handleDelete(menu._id)}
                                         className="btn"
                                     >

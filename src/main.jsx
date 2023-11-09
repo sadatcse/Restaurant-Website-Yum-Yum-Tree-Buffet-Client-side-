@@ -29,6 +29,7 @@ import Error404 from './components/Page/Error404';
 import Blog from './components/Page/Blog';
 import Updateproduct from './components/Dashboard/Updateproduct';
 import OrderPage from './components/Page/OrderPage';
+import Myorderfood from './components/Page/Myorderfood';
 
 
 
@@ -69,9 +70,9 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/menus/${params.id}`)   
       },
       {
-        path: '/myadd/:email',
-        element: <Myadded></Myadded>,
-        loader: ({ params }) => fetch(`http://localhost:5000/menuse/${params.email}`)   
+        path: '/myadd/',
+        element: <Myadded></Myadded>
+           
       },
       {
         path: '/blog',
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
         path: '/order/:id',
         element:<OrderPage></OrderPage>,
         loader: ({ params }) => fetch(`http://localhost:5000/menus/${params.id}`)  
+      },
+      {
+        path: '/myorder',
+        element:<Myorderfood></Myorderfood>
       },
        
     ]
