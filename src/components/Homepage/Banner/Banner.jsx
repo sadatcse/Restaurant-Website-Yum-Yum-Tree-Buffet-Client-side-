@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const RestaurantBanner = () => {
@@ -14,8 +15,8 @@ const RestaurantBanner = () => {
             <h2 className="text-6xl font-bold">Delicious Dining Experience</h2>
             <p>Discover a world of flavors and culinary delights.</p>
             <div>
-              <button className="btn btn-primary mr-5">View Menu</button>
-              <button className="btn btn-outline btn-secondary">Book a Table</button>
+            <Link to="/allfood"><button className="btn btn-primary mr-5">View all Menu</button> </Link>
+              
             </div>
             </div>
         </div>
@@ -31,7 +32,7 @@ const RestaurantBanner = () => {
             <h2 className="text-6xl font-bold">Savor the Flavors</h2>
             <p>Experience culinary artistry.</p>
             <div>
-              <button className="btn btn-primary mr-5">View Menu</button>
+            <Link to="/allfood"><button className="btn btn-primary mr-5">View all Menu</button> </Link>
               
             </div>
             </div>
@@ -49,7 +50,7 @@ const RestaurantBanner = () => {
             <p>A feast for the senses awaits you.</p>
             <div>
              
-              <button className="btn btn-outline btn-secondary">Chefs Specials</button>
+            <Link to="/allfood"><button className="btn btn-primary mr-5">View all Menu</button> </Link>
             </div>
             </div>
         </div>
@@ -65,7 +66,7 @@ const RestaurantBanner = () => {
             <h2 className="text-6xl font-bold">Satisfy Your Cravings</h2>
             <p>Unforgettable dining experiences, one plate at a time.</p>
             <div>
-              <button className="btn btn-primary mr-5">Explore Menu</button>
+            <Link to="/allfood"><button className="btn btn-primary mr-5">View all Menu</button> </Link>
              
             </div>
             </div>

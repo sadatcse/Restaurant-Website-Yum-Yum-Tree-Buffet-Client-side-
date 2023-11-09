@@ -1,5 +1,6 @@
 
 import { FiArrowLeft } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const Blog = () => {
     return (
@@ -8,7 +9,7 @@ const Blog = () => {
                 <div className="mb-8">
                     <button className="text-indigo-500 inline-flex items-center">
                         <FiArrowLeft className="mr-2" />
-                        Back to Homepage
+                        <Link to="/"> Back to Homepage</Link>
                     </button>
                 </div>
                 <div className="bg-white p-4 rounded-lg shadow-lg">
